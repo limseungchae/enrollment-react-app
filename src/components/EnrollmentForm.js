@@ -8,7 +8,7 @@ const EnrollmentForm = () => {
     const  [welcomMessage, setwelcomMessage] = useState("");
     const handleSubmit = (e) => {
         setwelcomMessage(`환영합니다. ${firstName} ${lastName}`);
-        e.preventDefault(); // submit 기능 중지
+        e.preventDefault(); // submit 기능 전파 중지
     };
     return(
         <div>
