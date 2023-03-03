@@ -9,6 +9,9 @@ const App = () => {
     const [ugseats, setUgSeats] = useState(60); // 참가가능 인원수
     const [pgseats, setPgSeats] = useState(40); // 참가가능 인원수
 
+    // 과정 등록한 학생들 정보를 저장하는 변수 선언
+    const [studDetails, setStudDetails] = useState({});
+
     const handleChange = (e) => {
         setProgram(e.target.value );
     };
@@ -32,13 +35,15 @@ const App = () => {
                         <input type="radio" value="PG" name="programGroup"/>석사과정
                     </li>
                     <li> <label className="parentLabels">{program} 참가 가능 인원 : {
-                        (program == 'UG') ? ugseats : pgseats } 명</label></li>
+                        (program === 'UG') ? ugseats : pgseats } 명</label></li>
                 </ul>
             </div>
             <EnrollmentForm chosenProgram={program}
-                            currentSeat={(program === 'UG') ? ugseats  : pgseats}
-                            setUpdateSeats={setUpdateSeats} />
-            <EnrolList />
+                currentSeat={(program === 'UG') ? ugseats  : pgseats}
+                setUpdateSeats={setUpdateSeats}
+                setStudDetails={setStudDetails} />
+            <EnrolList studDetails={studDetails}
+                        setStudDetails={setStudDetails}/>
         </div>
     );
 };
