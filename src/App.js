@@ -9,7 +9,7 @@ const App = () => {
     const [pgseats, setPgSeats] = useState(40); // 참가가능 인원수
 
     const handleChange = (e) => {
-        setProgram(e.target.value);
+        setProgram(e.target.value );
     };
 
     // 프로그램별 참가가능 인원수를 변경하는 함수
@@ -36,7 +36,7 @@ const App = () => {
                 <br/><br/><br/>
             </div>
             <EnrollmentForm chosenProgram={program}
-                            currentSeat={(program === 'UG') ? ugseats : pgseats}
+                            currentSeat={(program === 'UG') ? ugseats  : pgseats}
                             setUpdateSeats={setUpdateSeats} />
         </div>
     );
