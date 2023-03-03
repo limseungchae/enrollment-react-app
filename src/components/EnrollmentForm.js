@@ -3,9 +3,16 @@ import { useState } from "react";
 import '../App.css';
 
 const EnrollmentForm = () => {
+    // 폼에 입력한 이름/성을 기억하기 위해 state형 변수 선언
+    // onBlur 이벤트 발생시 입력한 이름/성을
+    // firsName, lastName변수에 저장
     const  [firstName, setFirsName] = useState("");
     const  [lastName, setLastName] = useState("");
+    // state형 변수에 저장된 이름/성을 환영메세지로 출력하기 위해 선언
     const  [welcomMessage, setwelcomMessage] = useState("");
+
+    // '등록하기' 버튼 클릭시 이름/성을 환영메세지로 만들어
+    // 폼 아래쪽에 표시
     const handleSubmit = (e) => {
         setwelcomMessage(`환영합니다. ${firstName} ${lastName}`);
         e.preventDefault(); // submit 기능 전파 중지
