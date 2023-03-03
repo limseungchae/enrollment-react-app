@@ -88,6 +88,7 @@
 .message {
     color:rgba(31, 226, 80, 0.671);
     width: 500px;
+    white-space: pre-line;
 }
 .actionIcon {
     font-size: 16px;
