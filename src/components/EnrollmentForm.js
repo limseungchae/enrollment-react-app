@@ -20,10 +20,8 @@ const EnrollmentForm = (props) => {
     const [studKey, setStudKey] = useState(0);
 
     const handleEdit = (key) => {
-        // 수정할 학생정보를 화면에 표시
-        setFirsName(firstName);
-        setLastName(lastName);
-        setEmail(email);
+        // 수정할 학생정보를 폼에 표시
+        handleFormInput(firstName, lastName, email);
 
         setStudKey(key);
         setBtbnValue('수정하기');
@@ -70,12 +68,17 @@ const EnrollmentForm = (props) => {
         setInput(e.target.value);
     };
 
+    const handleFormInput = (fname, lname, email) => {
+        setFirsName(fname);
+        setLastName(lname);
+        setEmail(email);
+
+    };
+
     // 취소하기 버튼 클릭시
     // 폼에 입력된 데이터 제거, 버튼 글자 바꿈
     const handleCancel = (e) => {
-        setFirsName('firstName');
-        setLastName('');
-        setEmail('email');
+        handleFormInput('','','');
 
         setBtbnValue('등록하기');
         e.preventDefault();
