@@ -36,7 +36,7 @@ const App = () => {
     // 등록학생 삭제나 수정시 참가가능 인원수 재수정
     const restoreSeats = (pgm) => {
       pgm === 'UG' ? setUgSeats(ugseats + 1):
-                setPgSeats(pgseats + 1)
+                setPgSeats(pgseats + 1);
       setAction('');
     };
 

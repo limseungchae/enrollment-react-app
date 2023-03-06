@@ -15,6 +15,20 @@ const EnrollmentForm = (props) => {
     const [welcomMessage, setwelcomMessage] = useState("");
     const [msgStyle, setMsgStyle] = useState("redOne");
 
+    // 등록/수저 버튼 정의
+    const [btnValue, setBtbnValue] = useState("등록하기");
+    const [studKey, setStudKey] = useState(0);
+
+    const handleEdit = (key) => {
+        // 수정할 학생정보를 화면에 표시
+        setFirsName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+
+        setStudKey(key);
+        setBtbnValue('수정하기');
+    }
+
     // '등록하기' 버튼 클릭시 이름/성을 환영메세지로 만들어
     // 폼 아래쪽에 표시
     const handleSubmit = (e) => {
@@ -30,11 +44,17 @@ const EnrollmentForm = (props) => {
 
             // 등록완료된 학생정보에 사용할 key 생성
             const rndKey = Math.floor(1000+ Math.random() * 9000);
+
+            // 학생정보 등록시 rndKey를
+            // 학생정보 수정시 studKey를 사용하도록 함
+            const key = btnValue === '등록하기' ? rndKey : studKey;
+
             // 생성한 key와 등록완료된 학생정보를 props에 저장
             let stud = {
-                key: rndKey, fname: firstName, lname: lastName,
+                key: key, fname: firstName, lname: lastName,
                 program: props.chosenProgram, email: email,
-                edit: <MdEdit className="actionIcon" />,
+                edit: <MdEdit className="actionIcon"
+                onClick={() => handleEdit(key)}/>,
 
                 // 삭제 아이콘 클릭시 삭제 대사 학생정보의 키를 넘김
                 delete: <MdDelete className="actionIcon"
@@ -48,6 +68,17 @@ const EnrollmentForm = (props) => {
     };
     const handleInputChange = (setInput, e) => {
         setInput(e.target.value);
+    };
+
+    // 취소하기 버튼 클릭시
+    // 폼에 입력된 데이터 제거, 버튼 글자 바꿈
+    const handleCancel = (e) => {
+        setFirsName('firstName');
+        setLastName('');
+        setEmail('email');
+
+        setBtbnValue('등록하기');
+        e.preventDefault();
     };
 
     return(
@@ -78,8 +109,12 @@ const EnrollmentForm = (props) => {
                     </li>
 
                     <li id="center-btn">
-                        <button type="submit" id="btnEnrol"
-                                name="enrol" onClick={handleSubmit}>등록하기</button>
+                        <button type="submit" id="btnEnrol" className="btn"
+                                name="enrol" onClick={handleSubmit}>
+                            {btnValue}</button>
+                        <button type="submit" id="btnCancel" className="btn"
+                                name="cancel" onClick={handleSubmit}>
+                            취소하기</button>
                     </li>
                     <li className="message">
                         <label id="studentMsg" className={msgStyle}>
