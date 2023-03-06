@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import EnrollmentForm from "./components/EnrollmentForm";
 import EnrolList from "./components/EnrolList";
+import {act} from "react-dom/test-utils";
 
 // EnrollmentForm이라는 폼을 return하도록
 // 정의된 App 컴퍼넌트
 const App = () => {
     const [program, setProgram] = useState("UG"); // 프로그래 종류
-    const [ugseats, setUgSeats] = useState(60); // 참가가능 인원수
+    const [ugseats, setUgSeats] = useState(60);  // 참가가능 인원수
     const [pgseats, setPgSeats] = useState(40); // 참가가능 인원수
+    const [action, setAction] = useState();             // 작업 종류 지정
+    const [selItemKey, setSelItemKey] = useState();    // 등록정보 키
 
     // 과정 등록한 학생들 정보를 저장하는 변수 선언
     const [studDetails, setStudDetails] = useState({});
@@ -23,6 +26,12 @@ const App = () => {
         else
             setPgSeats(modifySeat);
     };
+
+    // 작업종류, 키 설정 함수
+    const handleItemSelection = (action, key) => {
+        setAction(action);
+        setSelItemKey(key);
+    }
 
     return (
         <div className="App">
@@ -41,9 +50,13 @@ const App = () => {
             <EnrollmentForm chosenProgram={program}
                 currentSeat={(program === 'UG') ? ugseats  : pgseats}
                 setUpdateSeats={setUpdateSeats}
-                setStudDetails={setStudDetails} />
+                setStudDetails={setStudDetails}
+                handleItemSelection={handleItemSelection} />
+
             <EnrolList studDetails={studDetails}
-                        setStudDetails={setStudDetails}/>
+                        setStudDetails={setStudDetails}
+                        selectedItemKey={selItemKey}
+                        action={action}/>
         </div>
     );
 };
