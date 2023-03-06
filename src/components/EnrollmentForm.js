@@ -19,9 +19,12 @@ const EnrollmentForm = (props) => {
     const [btnValue, setBtbnValue] = useState("등록하기");
     const [studKey, setStudKey] = useState(0);
 
-    const handleEdit = (key) => {
+    const handleEdit = (key, program) => {
         // 수정할 학생정보를 폼에 표시
         handleFormInput(firstName, lastName, email);
+
+        // 참가 프로그램 라디오 버튼에 표시
+        props.setReSelectProgram(program);
 
         setStudKey(key);
         setBtbnValue('수정하기');
@@ -52,7 +55,7 @@ const EnrollmentForm = (props) => {
                 key: key, fname: firstName, lname: lastName,
                 program: props.chosenProgram, email: email,
                 edit: <MdEdit className="actionIcon"
-                onClick={() => handleEdit(key)}/>,
+                onClick={() => handleEdit(key, props.chosenProgram)}/>,
 
                 // 삭제 아이콘 클릭시 삭제 대사 학생정보의 키를 넘김
                 delete: <MdDelete className="actionIcon"
