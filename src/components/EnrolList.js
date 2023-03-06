@@ -58,6 +58,8 @@ const EnrolList = (props) => {
             items = items.filter((item) => item !== deleteItem);
             // 삭제한 학생에 대한 참가가능 인원수 복구
             props.restoreSeats(deleteItem.program);
+        } else { // 대화살자에서 취소를 클릭하는 경우
+            props.setAction(''); // action 초기화
         }
         // ??
 

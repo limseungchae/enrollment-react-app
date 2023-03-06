@@ -63,7 +63,7 @@ const App = () => {
             <EnrolList studDetails={studDetails}
                         setStudDetails={setStudDetails}
                         selectedItemKey={selItemKey}
-                        action={action}
+                        action={action} setAction={setAction}
                         restoreSeats={restoreSeats}/>
         </div>
     );
